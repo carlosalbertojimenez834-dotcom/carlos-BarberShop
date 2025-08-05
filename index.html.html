@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos’s BarberShop Guelph</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLp3p1C3bL5PzK+B5v2Q2/y4bW6g0D8z25S3s0dK+I1F7jE1Q0/6L4l5dE6e7f8x5bF+Vq7+N6o1Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for background gradient */
+        .gradient-bg {
+            background: linear-gradient(to bottom, #f3f4f6 0%, #171717 100%);
+        }
+        /* Style for the main hero card with background image */
+        .hero-card {
+            /* Background image replaced with the URL you provided */
+            background-image: url('https://i.imgur.com/4mwK15l.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Custom dropdown specific styles */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 0.75rem 1rem; /* px-4 py-3 */
+            border-radius: 0.5rem; /* rounded-lg */
+            background-color: #374151; /* bg-gray-700 */
+            color: #ffffff; /* text-white */
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .dropdown-header:focus {
+            outline: none;
+            border-color: #dc2626; /* focus:ring-red-600 */
+        }
+
+        .dropdown-header img {
+            border-radius: 50%; /* Make images round */
+            margin-right: 0.75rem; /* space-x-3 */
+        }
+
+        .dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #374151; /* bg-gray-700 */
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 0.25rem; /* mt-1 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+            z-index: 10;
+            max-height: 200px; /* Limit height for scroll */
+            overflow-y: auto; /* Enable scrolling */
+            display: none; /* Hidden by default */
+        }
+
+        .dropdown-list.active {
+            display: block;
+        }
+
+        .dropdown-option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem; /* px-4 py-3 */
+            cursor: pointer;
+            color: #ffffff; /* text-white */
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-option:hover {
+            background-color: #4b5563; /* hover:bg-gray-600 */
+        }
+
+        .dropdown-option img {
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Navigation -->
+    <header class="bg-gray-900 text-white p-4 fixed w-full z-50 shadow-lg">
+        <nav class="container mx-auto flex justify-between items-center">
+            <!-- Barbershop name is now clickable -->
+            <a href="#" class="text-2xl sm:text-3xl font-bold text-red-600">Carlos’s BarberShop Guelph</a>
+            <div class="hidden md:flex space-x-6 text-lg">
+                <a href="#home" class="hover:text-red-500 transition-colors">Home</a>
+                <a href="#services" class="hover:text-red-500 transition-colors">Services</a>
+                <a href="#gallery" class="hover:text-red-500 transition-colors">Gallery</a>
+                <a href="#contact" class="hover:text-red-500 transition-colors">Contact</a>
+            </div>
+            <!-- Mobile menu button -->
+            <button id="menu-button" class="md:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-gray-950 z-40 hidden md:hidden">
+        <div class="flex justify-end p-4">
+            <button id="close-menu-button" class="text-4xl text-white focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center justify-center h-full text-3xl space-y-8">
+            <a href="#home" class="text-white hover:text-red-500 transition-colors" onclick="closeMenu()">Home</a>
+            <a href="#services" class="text-white hover:text-red-500 transition-colors" onclick="closeMenu()">Services</a>
+            <a href="#gallery" class="text-white hover:text-red-500 transition-colors" onclick="closeMenu()">Gallery</a>
+            <a href="#contact" class="text-white hover:text-red-500 transition-colors" onclick="closeMenu()">Contact</a>
+        </div>
+    </div>
+
+    <main class="pt-16">
+        <!-- Home section (Hero) with gradient background and image card -->
+        <section id="home" class="gradient-bg h-screen flex flex-col justify-center items-center text-center p-4">
+            <div class="hero-card rounded-3xl p-8 md:p-12 w-full max-w-5xl mx-auto shadow-2xl flex flex-col justify-center items-center h-96">
+                <!-- Overlay layer for better text readability -->
+                <div class="bg-black bg-opacity-70 absolute inset-0 rounded-3xl"></div>
+                <div class="relative z-10 flex flex-col justify-center items-center h-full">
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight">
+                        Carlos’s BarberShop Guelph
+                    </h1>
+                    <p class="mt-4 text-lg md:text-xl font-light text-gray-300">
+                        Your style, our passion.
+                    </p>
+                    <!-- Book now button in hero, wider and with anchor to form -->
+                    <a href="#book-appointment" class="mt-8 inline-block px-12 py-3 bg-red-600 text-white font-bold rounded-full text-lg shadow-xl hover:bg-red-700 transition-all transform hover:scale-105">
+                        Book Your Appointment!
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services section with background image -->
+        <section id="services" class="relative py-20 bg-gray-800 bg-cover bg-center" style="background-image: url('https://i.imgur.com/BQuKSRy.jpeg');">
+            <!-- Dark overlay layer for better text readability -->
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-4xl font-bold text-red-600 mb-4">Our Services</h2>
+                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+                    We offer a wide range of services to keep your style impeccable.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1: Haircut -->
+                    <div class="bg-gray-900 bg-opacity-80 p-6 rounded-3xl shadow-xl transition-transform transform hover:scale-105">
+                        <!-- Replaced "Haircut" image with the URL you provided -->
+                        <img src="https://i.imgur.com/gCHeRpC.jpeg" alt="Haircut Example" class="w-full h-auto rounded-xl mb-4">
+                        <i class="fas fa-cut text-5xl text-red-600 mb-6"></i>
+                        <h3 class="text-2xl font-semibold mb-2">Haircut</h3>
+                        <p class="text-gray-400">From classic cuts to the latest trends, our experts will give you the perfect look.</p>
+                    </div>
+                    <!-- Service 2: Classic Shave -->
+                    <div class="bg-gray-900 bg-opacity-80 p-6 rounded-3xl shadow-xl transition-transform transform hover:scale-105">
+                        <!-- Replaced "Classic Shave" image with the URL you provided -->
+                        <img src="https://i.imgur.com/t8qjjwH.jpeg" alt="Classic Shave Example" class="w-full h-auto rounded-xl mb-4">
+                        <i class="fas fa-scissors text-5xl text-red-600 mb-6"></i>
+                        <h3 class="text-2xl font-semibold mb-2">Classic Shave</h3>
+                        <p class="text-gray-400">Experience the luxury of a razor shave, hot towels, and premium products.</p>
+                    </div>
+                    <!-- Service 3: Beard Trim -->
+                    <div class="bg-gray-900 bg-opacity-80 p-6 rounded-3xl shadow-xl transition-transform transform hover:scale-105">
+                        <!-- Replaced "Beard Trim" image with the URL you provided -->
+                        <img src="https://i.imgur.com/osFkBWt.jpeg" alt="Beard Trim Example" class="w-full h-auto rounded-xl mb-4">
+                        <i class="fas fa-beard text-5xl text-red-600 mb-6"></i>
+                        <h3 class="text-2xl font-semibold mb-2">Beard Trim</h3>
+                        <p class="text-gray-400">Shape and care for your beard for a flawless and healthy finish.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold text-red-600 mb-4">Our Gallery</h2>
+                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+                    Get inspired by some of our most recent works.
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Gallery Image 1: Cut 1 -->
+                    <img src="https://i.imgur.com/sKrAYfU.jpeg" alt="Haircut 1" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                    <!-- Gallery Image 2: Cut 2 -->
+                    <img src="https://i.imgur.com/3FHnGvW.jpeg" alt="Haircut 2" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                    <!-- Gallery Image 3: Cut 3 -->
+                    <img src="https://i.imgur.com/xOmW0W1.jpeg" alt="Haircut 3" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                    <!-- Gallery Image 4: Cut 4 -->
+                    <img src="https://i.imgur.com/DUhLPxg.jpeg" alt="Haircut 4" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                    <!-- Gallery Image 5: Cut 5 -->
+                    <img src="https://i.imgur.com/J1bDZKt.jpeg" alt="Haircut 5" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                    <!-- Gallery Image 6: Cut 6 -->
+                    <img src="https://i.imgur.com/83zhoWW.jpeg" alt="Haircut 6" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                    <!-- Gallery Image 7: Cut 7 -->
+                    <img src="https://i.imgur.com/D3LfuUY.jpeg" alt="Haircut 7" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                    <!-- Gallery Image 8: Cut 8 -->
+                    <img src="https://i.imgur.com/S8oWI60.jpeg" alt="Haircut 8" class="rounded-2xl shadow-xl hover:opacity-80 transition-opacity">
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Form -->
+        <section id="book-appointment" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-4">
+                <h3 class="text-3xl font-bold text-red-600 text-center mb-8">Booking Form</h3>
+                <!-- Formspree URL is already included here. -->
+                <form id="booking-form" action="https://formspree.io/f/meqzzlkg" method="POST" class="max-w-2xl mx-auto space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-300 mb-2">Full Name</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-300 mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-gray-300 mb-2">Phone</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600">
+                    </div>
+
+                    <!-- Custom Barber Dropdown -->
+                    <div>
+                        <label for="selected-barber-value" class="block text-gray-300 mb-2">Select Your Barber</label>
+                        <div class="custom-dropdown" id="barber-dropdown">
+                            <div class="dropdown-header" id="dropdown-header" tabindex="0">
+                                <span id="selected-barber-display">-- Choose a barber --</span>
+                                <i class="fas fa-chevron-down text-gray-400"></i>
+                            </div>
+                            <div class="dropdown-list" id="dropdown-list">
+                                <!-- Options will be populated by JavaScript -->
+                            </div>
+                            <!-- Hidden input to store the selected value for form submission -->
+                            <input type="hidden" id="selected-barber-value" name="barber" value="">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-gray-300 mb-2">Message (desired services, date, etc.)</label>
+                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-16 py-4 bg-red-600 text-white font-bold rounded-full text-lg shadow-xl hover:bg-red-700 transition-all transform hover:scale-105">
+                        Send Booking
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact section -->
+        <section id="contact" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold text-red-600 mb-4">Schedule Your Appointment</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+                    Contact us to book your spot. We look forward to seeing you.
+                </p>
+                <div class="mt-12 flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-12 text-center">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-map-marker-alt text-3xl text-red-600"></i>
+                        <p class="text-lg text-gray-300">87 Macdonell St, Guelph, ON N1H2Z7</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-phone-alt text-3xl text-red-600"></i>
+                        <!-- Clickable phone link -->
+                        <a href="tel:+15192659515" class="text-lg text-gray-300 hover:text-red-500 transition-colors">(519) 265-9515</a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-envelope text-3xl text-red-600"></i>
+                        <p class="text-lg text-gray-300">hello@barbershop.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map location section -->
+        <section id="map" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold text-red-600 mb-4">Our Location</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+                    Find us at our shop, we are ready to serve you.
+                </p>
+                <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-gray-700">
+                    <!-- Google Maps iframe updated with the new address -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2899.789139886047!2d-80.25206308468758!3d43.54350177912443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b885a5369c071%3A0xc304a081977e2338!2s87%20Macdonell%20St%2C%20Guelph%2C%20ON%20N1H2Z7!5e0!3m2!1sen!2sca!4v1625056385312!5m2!1sen!2sca"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        class="w-full">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 py-8 text-center">
+        <p>&copy; 2024 Carlos’s BarberShop Guelph. All rights reserved.</p>
+    </footer>
+
+    <!-- Script for mobile navigation and custom dropdown -->
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Show mobile menu
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        // Hide mobile menu
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Hide mobile menu when clicking a link
+        function closeMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // --- Custom Barber Dropdown Logic ---
+        const barbers = [
+            { name: "Carlos Jimenez", value: "Carlos Jimenez", image: "https://i.imgur.com/wO7rsj4.jpeg" }, // Updated name
+            { name: "Aaron Smith", value: "Aaron Smith", image: "https://i.imgur.com/wL9vUGb.jpeg" }, // Updated name
+            { name: "Daniel Jefferson", value: "Daniel Jefferson", image: "https://i.imgur.com/Z2PT4Fv.jpeg" } // Updated name and image
+        ];
+
+        const dropdownHeader = document.getElementById('dropdown-header');
+        const dropdownList = document.getElementById('dropdown-list');
+        const selectedBarberDisplay = document.getElementById('selected-barber-display');
+        const selectedBarberValueInput = document.getElementById('selected-barber-value');
+
+        // Populate dropdown options
+        function populateBarberDropdown() {
+            dropdownList.innerHTML = ''; // Clear existing options
+            barbers.forEach(barber => {
+                const optionDiv = document.createElement('div');
+                optionDiv.classList.add('dropdown-option');
+                optionDiv.setAttribute('data-value', barber.value);
+                optionDiv.setAttribute('data-name', barber.name); // Store full name for display
+
+                const img = document.createElement('img');
+                img.src = barber.image;
+                img.alt = barber.name;
+                img.classList.add('w-8', 'h-8', 'object-cover', 'rounded-full', 'mr-3'); // Tailwind classes for image size and margin
+
+                const span = document.createElement('span');
+                span.textContent = barber.name;
+
+                optionDiv.appendChild(img);
+                optionDiv.appendChild(span);
+
+                optionDiv.addEventListener('click', () => selectBarber(barber));
+                dropdownList.appendChild(optionDiv);
+            });
+        }
+
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            dropdownList.classList.toggle('active');
+            dropdownHeader.setAttribute('aria-expanded', dropdownList.classList.contains('active'));
+        }
+
+        // Select a barber
+        function selectBarber(barber) {
+            selectedBarberDisplay.innerHTML = `<img src="${barber.image}" alt="${barber.name}" class="w-8 h-8 object-cover rounded-full mr-3 inline-block"> ${barber.name}`;
+            selectedBarberValueInput.value = barber.value; // Set the value for form submission
+            dropdownList.classList.remove('active');
+            dropdownHeader.setAttribute('aria-expanded', 'false');
+        }
+
+        // Event listener for dropdown header click
+        dropdownHeader.addEventListener('click', toggleDropdown);
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            const customDropdown = document.getElementById('barber-dropdown');
+            if (!customDropdown.contains(event.target) && dropdownList.classList.contains('active')) {
+                dropdownList.classList.remove('active');
+                dropdownHeader.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Initialize dropdown on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            populateBarberDropdown();
+            // Set initial display text
+            selectedBarberDisplay.textContent = "-- Choose a barber --";
+            selectedBarberValueInput.value = ""; // Ensure hidden input is empty initially
+            dropdownHeader.setAttribute('aria-haspopup', 'listbox');
+            dropdownHeader.setAttribute('aria-expanded', 'false');
+            dropdownHeader.setAttribute('role', 'combobox');
+        });
+    </script>
+</body>
+</html>
